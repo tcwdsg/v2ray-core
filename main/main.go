@@ -19,6 +19,7 @@ import (
 	"v2ray.com/core/common/cmdarg"
 	"v2ray.com/core/common/platform"
 	_ "v2ray.com/core/main/distro/all"
+	_ "v2ray.com/core/main/distro/debug"
 )
 
 var (
@@ -29,7 +30,7 @@ var (
 	format      = flag.String("format", "json", "Format of input file.")
 
 	/*  We have to do this here because Golang's Test will also need to parse flag, before
-		main func in this file is run.
+	main func in this file is run.
 	*/
 	_ = func() error {
 

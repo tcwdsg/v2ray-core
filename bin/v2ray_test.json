@@ -1,0 +1,92 @@
+{
+  "log": {
+    "error": "",
+    "loglevel": "info",
+    "access": ""
+  },
+  "inbounds": [
+    {
+      "listen": "0.0.0.0",
+      "protocol": "socks",
+      "settings": {
+        "udp": false,
+        "auth": "noauth"
+      },
+      "port": "13000"
+    },
+    {
+      "listen": "0.0.0.0",
+      "protocol": "http",
+      "settings": {
+        "timeout": 360
+      },
+      "port": "13001"
+    }
+  ],
+  "outbounds": [
+    {
+      "mux": {
+        "enabled": false,
+        "concurrency": 8
+      },
+      "protocol": "vmess",
+      "streamSettings": {
+        "wsSettings": {
+          "path": "/chat",
+          "headers": {
+            "host": ""
+          }
+        },
+        "tlsSettings": {
+          "serverName": "us1.lixianwei.com",
+          "allowInsecure": false
+        },
+        "security": "tls",
+        "network": "ws"
+      },
+      "tag": "proxy",
+      "settings": {
+        "vnext": [
+          {
+            "address": "us1.lixianwei.com",
+            "users": [
+              {
+                "id": "D371BF11-AF7A-46C7-AC5C-901C8580418E",
+                "alterId": 8,
+                "level": 0,
+                "security": "auto"
+              }
+            ],
+            "port": 443
+          }
+        ]
+      }
+    },
+    {
+      "tag": "direct",
+      "protocol": "freedom",
+      "settings": {
+        "domainStrategy": "AsIs",
+        "redirect": "",
+        "userLevel": 0
+      }
+    },
+    {
+      "tag": "block",
+      "protocol": "blackhole",
+      "settings": {
+        "response": {
+          "type": "none"
+        }
+      }
+    }
+  ],
+  "dns": {},
+  "routing": {
+    "settings": {
+      "domainStrategy": "AsIs",
+      "rules": []
+    }
+  },
+  "transport": {}
+}
