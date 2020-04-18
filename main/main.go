@@ -12,9 +12,11 @@ import (
 	"path"
 	"path/filepath"
 	"runtime"
+	"runtime/debug"
 	"strings"
 	"syscall"
 
+	//_ "github.com/mkevac/debugcharts"
 	"v2ray.com/core"
 	"v2ray.com/core/common/cmdarg"
 	"v2ray.com/core/common/platform"
@@ -135,6 +137,9 @@ func printVersion() {
 }
 
 func main() {
+	runtime.GOMAXPROCS(1)
+	debug.FreeOSMemory()
+	fmt.Println("呵呵 开始了")
 
 	flag.Parse()
 
@@ -164,6 +169,8 @@ func main() {
 
 	// Explicitly triggering GC to remove garbage from config loading.
 	runtime.GC()
+	debug.FreeOSMemory()
+	fmt.Println("呵呵 结束了")
 
 	{
 		osSignals := make(chan os.Signal, 1)

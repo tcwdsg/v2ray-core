@@ -26,8 +26,8 @@
   "outbounds": [
     {
       "mux": {
-        "enabled": false,
-        "concurrency": 8
+        "enabled": true,
+        "concurrency": 16
       },
       "protocol": "vmess",
       "streamSettings": {
@@ -88,5 +88,22 @@
       "rules": []
     }
   },
-  "transport": {}
+  "transport": {},
+  "policy" : {
+    "levels": {
+      "0": {
+        "handshake": 4,
+        "connIdle": 5,
+        "uplinkOnly": 2,
+        "downlinkOnly": 5,
+        "statsUserUplink": false,
+        "statsUserDownlink": false,
+        "bufferSize": 0
+      }
+    },
+    "system": {
+      "statsInboundUplink": false,
+      "statsInboundDownlink": false
+    }
+  }
 }

@@ -8,6 +8,8 @@ import (
 	"encoding/base64"
 	"io"
 	"net/http"
+	"runtime"
+	"runtime/debug"
 	"strings"
 	"time"
 
@@ -85,6 +87,8 @@ type readerOnly struct {
 }
 
 func (s *Server) Process(ctx context.Context, network net.Network, conn internet.Connection, dispatcher routing.Dispatcher) error {
+	runtime.GC()
+	debug.FreeOSMemory()
 	inbound := session.InboundFromContext(ctx)
 	if inbound != nil {
 		inbound.User = &protocol.MemoryUser{
