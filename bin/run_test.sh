@@ -1,4 +1,4 @@
-
+git pull
 basedir=/data/gs/v2ray-core
 cd $basedir/main
 env CGO_ENABLED=0 go build -o $basedir/bin/v2ray -ldflags "-s -w"
